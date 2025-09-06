@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samarth Jayswal - Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+        }
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .scroll-smooth { scroll-behavior: smooth; }
+        
+        /* Glassmorphism CTA Button */
+        .glass-btn {
+            background: rgba(59, 130, 246, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .glass-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .glass-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .glass-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Ripple Effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .ripple:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Pulse Animation */
+        .pulse-hover:hover {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Floating Animation */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Tilt Card Effect */
+        .tilt-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(10deg) rotateY(10deg) translateZ(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Magnetic Effect */
+        .magnetic {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Glow Effect */
+        .glow:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* Scale Animation */
+        .scale-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Neon Glow Effect */
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            animation: neon-pulse 2s ease-in-out infinite alternate;
+        }
+        @keyframes neon-pulse {
+            from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 40px rgba(59, 130, 246, 0.4); }
+        }
+        
+        /* Gradient Text Animation */
+        .gradient-text {
+            background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-flow 3s ease infinite;
+        }
+        @keyframes gradient-flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Enthusiastic Hover */
+        .enthusiastic:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans bg-slate-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gradient-to-r from-blue-400/80 via-indigo-500/80 to-purple-600/80 dark:from-gray-800/80 dark:via-slate-700/80 dark:to-gray-900/80 backdrop-blur-md z-50 border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="font-mono font-bold text-xl text-white">
+                    &lt;Samarth/&gt;
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-white hover:text-white/80 transition-colors">Home</a>
+                    <a href="#about" class="text-white hover:text-white/80 transition-colors">About</a>
+                    <a href="#skills" class="text-white hover:text-white/80 transition-colors">Skills</a>
+                    <a href="#projects" class="text-white hover:text-white/80 transition-colors">Projects</a>
+                    <a href="#contact" class="text-white hover:text-white/80 transition-colors">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors">
+                        <i class="fas fa-sun dark:hidden text-white"></i>
+                        <i class="fas fa-moon hidden dark:block text-white"></i>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center space-x-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-lg bg-white/20">
+                        <i class="fas fa-sun dark:hidden text-white"></i>
+                        <i class="fas fa-moon hidden dark:block text-white"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="p-2 text-white">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 dark:from-gray-800 dark:via-slate-700 dark:to-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-8">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">
+                    Hi, I'm <span class="gradient-text ">Samarth</span>
+                </h1>
+                <div class="text-2xl md:text-3xl text-white mb-8">
+                    <span id="typing-text" class="typing-cursor gradient-text"></span>
+                </div>
+                <p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12 leading-relaxed">
+                    Full Stack Developer passionate about creating secure and user-friendly web applications using modern technologies like MERN stack.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="glass-btn ripple text-white px-8 py-4 rounded-full font-medium magnetic  enthusiastic">
+                        <i class="fas fa-rocket mr-2"></i>View My Work
+                    </a>
+                    <a href="#contact" class="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full font-medium transition-all duration-300 ripple pulse-hover enthusiastic">
+                        <i class="fas fa-paper-plane mr-2"></i>Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 dark:from-gray-800 dark:via-slate-700 dark:to-gray-900 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text ">About Me</h2>
+                <div class="w-24 h-1 bg-white mx-auto"></div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="bg-white/20 backdrop-blur-lg p-8 rounded-2xl shadow-lg tilt-card pulse-hover glow border border-white/30">
+                        <h3 class="text-2xl font-bold mb-6 gradient-text ">Full Stack Developer</h3>
+                        <p class="text-white/90 mb-6 leading-relaxed">
+                            I'm Samarth Jayswal, a passionate Full Stack Developer currently pursuing Information Technology at LJ Institute of Engineering & Technology. With hands-on experience in MERN stack development, I specialize in building secure and user-friendly applications.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-white w-6"></i>
+                                <span class="ml-3 text-white/90">Bopal, Ahmedabad, Gujarat</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-white w-6"></i>
+                                <span class="ml-3 text-white/90">IT Student at LJIET (5th Semester)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-award text-white w-6"></i>
+                                <span class="ml-3 text-white/90">Diploma in IT (CGPA: 8.22)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-gray-900 dark:bg-transparent dark:border-none text-green-400 p-6 rounded-2xl font-mono text-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <span class="ml-4 text-gray-400">developer.js</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div><span class="text-purple-400">const</span> <span class="text-blue-400">developer</span> = {</div>
+                            <div class="ml-4">name: <span class="text-yellow-300">"Samarth Jayswal"</span>,</div>
+                            <div class="ml-4">role: <span class="text-yellow-300">"Full Stack Developer"</span>,</div>
+                            <div class="ml-4">location: <span class="text-yellow-300">"Ahmedabad, Gujarat"</span>,</div>
+                            <div class="ml-4">education: <span class="text-yellow-300">"IT @ LJIET"</span>,</div>
+                            <div class="ml-4">skills: [</div>
+                            <div class="ml-8"><span class="text-yellow-300">"React"</span>, <span class="text-yellow-300">"Node.js"</span>,</div>
+                            <div class="ml-8"><span class="text-yellow-300">"MongoDB"</span>, <span class="text-yellow-300">"Express"</span></div>
+                            <div class="ml-4">]</div>
+                            <div>}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 dark:from-gray-800 dark:via-slate-700 dark:to-gray-900 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text ">Skills & Technologies</h2>
+                <div class="w-24 h-1 bg-white mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg tilt-card pulse-hover magnetic glow border border-white/30 dark:border-gray-600/30">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float">
+                            <i class="fab fa-react text-2xl text-white"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2 text-white">Frontend</h3>
+                        <div class="text-sm text-white/90 space-y-1">
+                            <div>React</div>
+                            <div>HTML5</div>
+                            <div>CSS3</div>
+                            <div>JavaScript</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg tilt-card pulse-hover magnetic glow border border-white/30 dark:border-gray-600/30">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float" style="animation-delay: 1s;">
+                            <i class="fas fa-server text-2xl text-white"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2 text-white">Backend</h3>
+                        <div class="text-sm text-white/90 space-y-1">
+                            <div>Node.js</div>
+                            <div>Express</div>
+                            <div>PHP</div>
+                            <div>REST APIs</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg tilt-card pulse-hover magnetic glow border border-white/30 dark:border-gray-600/30">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float" style="animation-delay: 2s;">
+                            <i class="fas fa-database text-2xl text-white"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2 text-white">Database</h3>
+                        <div class="text-sm text-white/90 space-y-1">
+                            <div>MongoDB</div>
+                            <div>MySQL</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg tilt-card pulse-hover magnetic glow border border-white/30 dark:border-gray-600/30">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float" style="animation-delay: 3s;">
+                            <i class="fas fa-code text-2xl text-white"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2 text-white">Languages</h3>
+                        <div class="text-sm text-white/90 space-y-1">
+                            <div>Java</div>
+                            <div>Python</div>
+                            <div>C Language</div>
+                            <div>Git/GitHub</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 dark:from-gray-800 dark:via-slate-700 dark:to-gray-900 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Featured Projects</h2>
+                <div class="w-24 h-1 bg-white mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white/20 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 tilt-card pulse-hover glow border border-white/30">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-graduation-cap text-4xl text-white float"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">Student Notes Sharing System</h3>
+                        <p class="text-white/90 mb-4">Full-stack platform using MERN stack for sharing academic notes with role-based access for Admin, Teacher, and Student.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">MongoDB</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Express</span>
+                            <span class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 text-xs rounded-full">React</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 tilt-card pulse-hover glow border border-white/30">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-tasks text-4xl text-white float" style="animation-delay: 1s;"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">BlitzBoard</h3>
+                        <p class="text-white/90 mb-4">Django-based task management app with role-based access, project/task organization, and Bootstrap responsive UI.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Django</span>
+                            <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded-full">Python</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 tilt-card pulse-hover glow border border-white/30">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-graduation-cap text-4xl text-white float" style="animation-delay: 2s;"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">EduCat - E-learning App</h3>
+                        <p class="text-white/90 mb-4">Full-stack LMS with role-based authentication, course & quiz management, YouTube integration, and progress tracking.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">MERN</span>
+                            <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded-full">YouTube API</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Auth</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 tilt-card pulse-hover glow border border-white/30">
+                    <div class="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-cloud-sun text-4xl text-white float" style="animation-delay: 3s;"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">Weather API Project</h3>
+                        <p class="text-white/90 mb-4">Python-based weather application showing current weather, humidity, wind speed and 5-day forecast.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded-full">Python</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">Weather API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 tilt-card pulse-hover glow border border-white/30">
+                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-film text-4xl text-white float" style="animation-delay: 4s;"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white">Movie Recommender System</h3>
+                        <p class="text-white/90 mb-4">Django web app with user authentication, ratings, watchlist, and personalized movie suggestions using collaborative filtering.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Django</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">ML</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">Auth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 dark:from-gray-800 dark:via-slate-700 dark:to-gray-900 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 gradient-text">Get In Touch</h2>
+                <div class="w-24 h-1 bg-white mx-auto mb-8"></div>
+                <p class="text-lg text-white/90 max-w-2xl mx-auto">
+                    Ready to transform your ideas into secure and user-friendly web applications? Let's collaborate and create innovative solutions together.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg text-center tilt-card pulse-hover magnetic ripple glow border border-white/30 dark:border-gray-600/30">
+                    <div class="w-12 h-12 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float">
+                        <i class="fas fa-envelope text-white"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2 text-white">Email</h3>
+                    <p class="text-white/90 text-sm">samarthjayswal05@gmail.com</p>
+                </div>
+                <a href="https://www.linkedin.com/in/samarth-jayswal9b3005250" target="_blank" class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg text-center block hover:shadow-xl transition-all duration-300 tilt-card pulse-hover magnetic ripple glow border border-white/30 dark:border-gray-600/30">
+                    <div class="w-12 h-12 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float" style="animation-delay: 1s;">
+                        <i class="fab fa-linkedin text-white"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2 text-white">LinkedIn</h3>
+                    <p class="text-white/90 text-sm">samarth-jayswal</p>
+                </a>
+                <a href="https://github.com/sam0305-dev" target="_blank" class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg text-center block hover:shadow-xl transition-all duration-300 tilt-card pulse-hover magnetic ripple glow border border-white/30 dark:border-gray-600/30">
+                    <div class="w-12 h-12 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float" style="animation-delay: 2s;">
+                        <i class="fab fa-github text-white"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2 text-white">GitHub</h3>
+                    <p class="text-white/90 text-sm">sam0305-dev</p>
+                </a>
+                <div class="bg-white/20 dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-lg text-center tilt-card pulse-hover magnetic ripple glow border border-white/30 dark:border-gray-600/30">
+                    <div class="w-12 h-12 bg-white/30 dark:bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 float" style="animation-delay: 3s;">
+                        <i class="fas fa-phone text-white"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2 text-white">Phone</h3>
+                    <p class="text-white/90 text-sm">+91 8200061369</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 dark:from-gray-800 dark:via-slate-700 dark:to-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="font-mono text-xl font-bold mb-4 text-white">
+                &lt;Samarth/&gt;
+            </div>
+            <p class="text-white/80">© 2024 Samarth Jayswal. Crafted with passion for web development and innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+
+        // Typing Animation
+        const typingTexts = [
+            'Full Stack Developer',
+            'MERN Stack Specialist',
+            'Web Developer',
+            'Problem Solver'
+        ];
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing-text');
+
+        function typeWriter() {
+            const currentText = typingTexts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % typingTexts.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        mobileMenuBtn.addEventListener('click', function() {
+            // Add mobile menu functionality here if needed
+        });
+
+        // Magnetic Effect
+        document.querySelectorAll('.magnetic').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                el.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Start typing animation
+        typeWriter();
+    </script>
+</body>
+</html>
